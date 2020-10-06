@@ -4,7 +4,7 @@ import '../menu-item/menu-item.styles.scss';
 
 const MenuItem = ({title, imageUrl, size, history, linkUrl, match}) => (
     // On click of specific menu item go to specific link that matches menu item
-    <div 
+    <div
         className={`${size} menu-item`} 
         onClick={() => history.push(`${match.url}${linkUrl}`)}>
     {/* Allowing background image of each menu item to be dynamically changed */}
