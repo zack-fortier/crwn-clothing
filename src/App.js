@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <div>   
         {/* Header of all pages */}
-        <Header />
+        <Header currentUser={this.state.currentUser} />
         {/* Links to different pages */}
         <Switch>
           {/* Home page */}
