@@ -11,6 +11,30 @@ import './App.css';
 import './pages/homepage/homepage.styles.scss';
 
 class App extends React.Component {
+  // Storing information of current user
+  constructor() {
+    super();
+
+    this.state = {
+      currentUser: null
+    }
+  }
+
+  unsubscribeFromAuth = null;
+  
+  // Using O Auth authentication
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user});
+      console.log(user);
+    })
+  }
+
+  // Signing out of O Auth authentication
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+  
   render() {
     return (
       <div>   
