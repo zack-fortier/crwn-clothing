@@ -24,10 +24,23 @@ class App extends React.Component {
   
   // Using O Auth authentication
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async user => {
-      createUserProfileDocument(user);
-      //this.setState({ currentUser: user});
-      //console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      // If the user has not been authenticated, create a user profile
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+          });
+        });
+      }
+      // If the user has been authenticated, set the user profile's data to the user's account
+      else {
+        this.setState({currentUser: userAuth});
+      }
     })
   }
 
