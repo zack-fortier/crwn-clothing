@@ -35,6 +35,8 @@ class App extends React.Component {
               ...snapShot.data()
             }
           });
+
+          console.log(this.state);
         });
       }
       // If the user has been authenticated, set the user profile's data to the user's account
